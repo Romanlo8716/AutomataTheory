@@ -33,6 +33,8 @@ namespace Laba1
             this.bPerform = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dLexicalAnalysisTable = new System.Windows.Forms.DataGridView();
+            this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dKeyWordsTable = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,10 +54,10 @@ namespace Laba1
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.dStandSymbolTable = new System.Windows.Forms.DataGridView();
-            this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label8 = new System.Windows.Forms.Label();
+            rMatrixText = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dLexicalAnalysisTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dKeyWordsTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dSeparatorsTable)).BeginInit();
@@ -69,13 +71,13 @@ namespace Laba1
             this.rText.Location = new System.Drawing.Point(539, 30);
             this.rText.Margin = new System.Windows.Forms.Padding(4);
             this.rText.Name = "rText";
-            this.rText.Size = new System.Drawing.Size(188, 387);
+            this.rText.Size = new System.Drawing.Size(265, 215);
             this.rText.TabIndex = 0;
             this.rText.Text = "";
             // 
             // bPerform
             // 
-            this.bPerform.Location = new System.Drawing.Point(539, 423);
+            this.bPerform.Location = new System.Drawing.Point(577, 491);
             this.bPerform.Margin = new System.Windows.Forms.Padding(4);
             this.bPerform.Name = "bPerform";
             this.bPerform.Size = new System.Drawing.Size(188, 59);
@@ -87,7 +89,7 @@ namespace Laba1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(615, 9);
+            this.label1.Location = new System.Drawing.Point(659, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 16);
@@ -105,8 +107,24 @@ namespace Laba1
             this.dLexicalAnalysisTable.Margin = new System.Windows.Forms.Padding(4);
             this.dLexicalAnalysisTable.Name = "dLexicalAnalysisTable";
             this.dLexicalAnalysisTable.RowHeadersWidth = 51;
-            this.dLexicalAnalysisTable.Size = new System.Drawing.Size(256, 454);
+            this.dLexicalAnalysisTable.Size = new System.Drawing.Size(256, 520);
             this.dLexicalAnalysisTable.TabIndex = 3;
+            // 
+            // text
+            // 
+            this.text.HeaderText = "Лексема";
+            this.text.MinimumWidth = 6;
+            this.text.Name = "text";
+            this.text.ReadOnly = true;
+            this.text.Width = 70;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Тип";
+            this.type.MinimumWidth = 6;
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.Width = 50;
             // 
             // dKeyWordsTable
             // 
@@ -115,11 +133,11 @@ namespace Laba1
             this.dKeyWordsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
-            this.dKeyWordsTable.Location = new System.Drawing.Point(735, 30);
+            this.dKeyWordsTable.Location = new System.Drawing.Point(812, 30);
             this.dKeyWordsTable.Margin = new System.Windows.Forms.Padding(4);
             this.dKeyWordsTable.Name = "dKeyWordsTable";
             this.dKeyWordsTable.RowHeadersWidth = 51;
-            this.dKeyWordsTable.Size = new System.Drawing.Size(334, 215);
+            this.dKeyWordsTable.Size = new System.Drawing.Size(334, 242);
             this.dKeyWordsTable.TabIndex = 4;
             // 
             // dataGridViewTextBoxColumn1
@@ -145,11 +163,11 @@ namespace Laba1
             this.dSeparatorsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
-            this.dSeparatorsTable.Location = new System.Drawing.Point(1077, 30);
+            this.dSeparatorsTable.Location = new System.Drawing.Point(1154, 30);
             this.dSeparatorsTable.Margin = new System.Windows.Forms.Padding(4);
             this.dSeparatorsTable.Name = "dSeparatorsTable";
             this.dSeparatorsTable.RowHeadersWidth = 51;
-            this.dSeparatorsTable.Size = new System.Drawing.Size(334, 215);
+            this.dSeparatorsTable.Size = new System.Drawing.Size(334, 242);
             this.dSeparatorsTable.TabIndex = 5;
             // 
             // dataGridViewTextBoxColumn3
@@ -175,11 +193,11 @@ namespace Laba1
             this.dLiteralsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6});
-            this.dLiteralsTable.Location = new System.Drawing.Point(735, 269);
+            this.dLiteralsTable.Location = new System.Drawing.Point(812, 296);
             this.dLiteralsTable.Margin = new System.Windows.Forms.Padding(4);
             this.dLiteralsTable.Name = "dLiteralsTable";
             this.dLiteralsTable.RowHeadersWidth = 51;
-            this.dLiteralsTable.Size = new System.Drawing.Size(334, 215);
+            this.dLiteralsTable.Size = new System.Drawing.Size(334, 254);
             this.dLiteralsTable.TabIndex = 6;
             // 
             // dataGridViewTextBoxColumn5
@@ -205,11 +223,11 @@ namespace Laba1
             this.dIndentifiersTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
-            this.dIndentifiersTable.Location = new System.Drawing.Point(1077, 269);
+            this.dIndentifiersTable.Location = new System.Drawing.Point(1154, 296);
             this.dIndentifiersTable.Margin = new System.Windows.Forms.Padding(4);
             this.dIndentifiersTable.Name = "dIndentifiersTable";
             this.dIndentifiersTable.RowHeadersWidth = 51;
-            this.dIndentifiersTable.Size = new System.Drawing.Size(334, 215);
+            this.dIndentifiersTable.Size = new System.Drawing.Size(334, 254);
             this.dIndentifiersTable.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn7
@@ -231,7 +249,7 @@ namespace Laba1
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(838, 10);
+            this.label2.Location = new System.Drawing.Point(914, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 16);
             this.label2.TabIndex = 8;
@@ -240,7 +258,7 @@ namespace Laba1
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1194, 10);
+            this.label3.Location = new System.Drawing.Point(1271, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 16);
             this.label3.TabIndex = 9;
@@ -249,7 +267,7 @@ namespace Laba1
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1178, 249);
+            this.label4.Location = new System.Drawing.Point(1261, 276);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(132, 16);
             this.label4.TabIndex = 10;
@@ -258,7 +276,7 @@ namespace Laba1
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(865, 249);
+            this.label5.Location = new System.Drawing.Point(941, 276);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 16);
             this.label5.TabIndex = 11;
@@ -294,24 +312,8 @@ namespace Laba1
             this.dStandSymbolTable.Margin = new System.Windows.Forms.Padding(4);
             this.dStandSymbolTable.Name = "dStandSymbolTable";
             this.dStandSymbolTable.RowHeadersWidth = 51;
-            this.dStandSymbolTable.Size = new System.Drawing.Size(254, 453);
+            this.dStandSymbolTable.Size = new System.Drawing.Size(254, 520);
             this.dStandSymbolTable.TabIndex = 15;
-            // 
-            // text
-            // 
-            this.text.HeaderText = "Лексема";
-            this.text.MinimumWidth = 6;
-            this.text.Name = "text";
-            this.text.ReadOnly = true;
-            this.text.Width = 70;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "Тип";
-            this.type.MinimumWidth = 6;
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            this.type.Width = 50;
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -329,11 +331,30 @@ namespace Laba1
             this.dataGridViewTextBoxColumn12.ReadOnly = true;
             this.dataGridViewTextBoxColumn12.Width = 60;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(609, 249);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(130, 16);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Матрица действий";
+            // 
+            // rMatrixText
+            // 
+            rMatrixText.Location = new System.Drawing.Point(539, 269);
+            rMatrixText.Name = "rMatrixText";
+            rMatrixText.Size = new System.Drawing.Size(266, 215);
+           rMatrixText.TabIndex = 17;
+            rMatrixText.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1810, 495);
+            this.ClientSize = new System.Drawing.Size(1810, 574);
+            this.Controls.Add(rMatrixText);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.dStandSymbolTable);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -351,7 +372,7 @@ namespace Laba1
             this.Controls.Add(this.rText);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Компилятор";
+            this.Text = "Транслятор";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dLexicalAnalysisTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dKeyWordsTable)).EndInit();
@@ -393,6 +414,8 @@ namespace Laba1
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.Label label8;
+        public static System.Windows.Forms.RichTextBox rMatrixText;
     }
 }
 

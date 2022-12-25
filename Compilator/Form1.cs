@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-
+using System.Linq;
 
 namespace Laba1
 {
@@ -11,7 +11,7 @@ namespace Laba1
     {
 
         public List<string> keyWords = new List<string> { "for", "in", "end" };
-        public List<string> separators = new List<string> { ":", ":=", "*=", "-=", "+=", "<=", ">=", "&", "&&", "*", ";", "-", "+", "/", "{", "}", "(", ")", "=", "<", ">", ",", "()", "[", "]" };
+        public List<string> separators = new List<string> {"*=", "-=", "+=", "*", ";", "-", "+", "/", "=", ",", "[", "]" , "(", ")" };
         public List<string> literals = new List<string>();
         public List<string> variables = new List<string>();
         ListWithDuplicates listSymbolTable = new ListWithDuplicates();
@@ -24,12 +24,24 @@ namespace Laba1
 
         private void bPerform_Click_1(object sender, EventArgs e)
         {
-            
+            createLexem();
+           
+        }
+
+        public void createLexem()
+        {
+            rMatrixText.Clear();
+
+            llkGrammatiks.listMatrix.Clear();
+            llkGrammatiks.E.Clear();
+            llkGrammatiks.T.Clear();
+          
+
             dLexicalAnalysisTable.Rows.Clear();
             dLexicalAnalysisTable.Refresh();
 
             dStandSymbolTable.Rows.Clear();
-           dStandSymbolTable.Refresh();
+            dStandSymbolTable.Refresh();
 
             dLiteralsTable.Rows.Clear();
             dLiteralsTable.Refresh();
@@ -42,17 +54,29 @@ namespace Laba1
             string buffer = "";
             for (int i = 0; i < code.Length; i++)
             {
-                if (code[i] == 39 || code[i] == 126 || code[i] == 35)
+                //MessageBox.Show(code[i].ToString());
+                if (!((code[i] >= 48 && code[i] <= 62) || (code[i] >= 65 && code[i] <= 90) || (code[i] == 32) || (code[i] >= 97 && code[i] <= 122) || (code[i] >= 60 && code[i] <= 62) || (code[i] >= 40 && code[i] <= 47) || (code[i] == 44) || (code[i] == 46) || (code[i] == 91) || (code[i] == 93) || code[i] == 10))
                 {
-                    MessageBox.Show($"Ошибка в лексеме: {code[i]}", "Вывод лексем", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Ошибка компиляции в символе {code[i]}");
                     return;
                 }
+
+                if (code[i] == 10)
+                {
+                    if (code[i - 1] == 10)
+                    {
+                        continue;
+                    }
+                }
+
                 if (buffer != "")
                 {
 
                     if (Convert.ToString(code[i]).Trim().Equals("")) //если нет пробелов
                     {
-                        addToList(buffer); //добавляем лексемы в список
+                        //if (!addToList(buffer))
+                        addToList(buffer);
+                        /* return;*///добавляем лексемы в список
                         buffer = ""; //очищаем буфер от лексемы
                     }
                     else if (separators.Contains(Convert.ToString(code[i]))) // если лексема относится к списку знаков
@@ -63,7 +87,8 @@ namespace Laba1
                         }
                         else
                         {
-                            addToList(buffer); // добавление лексемы в список
+                            if (!addToList(buffer))
+                                return; // добавление лексемы в список
                             buffer = Convert.ToString(code[i]); // буфер становится равным символу
                         }
                     }
@@ -71,7 +96,8 @@ namespace Laba1
                     {
                         if (separators.Contains(Convert.ToString(buffer[0])))
                         {//если первый элемент буфера относится к символу
-                            addToList(buffer); // добавление лексемы в список
+                            if (!addToList(buffer))
+                                return; // добавление лексемы в список
                             buffer = ""; //обнуление буфера
                         }
                         buffer += code[i];// сложение элементов к буферу
@@ -79,30 +105,87 @@ namespace Laba1
                 }
                 else
                 {
-                    buffer += code[i];// сложение элементов к буферу
+                    if (code[i] != 10 || code[i] != ' ')
+                    {
+                        buffer += code[i];// сложение элементов к буферу
+                        //MessageBox.Show(code[i].ToString());
+                    }
                 }
 
                 if (i == code.Length - 1)
                 {
-                    addToList(buffer);
+                    if (!addToList(buffer))
+                        return;
                 }
 
             }
 
             PrintKeyWord(dLiteralsTable, literals);
             PrintKeyWord(dIndentifiersTable, variables);
-            
 
-            tableStandSimbol(dLiteralsTable, 3);
-            tableStandSimbol(dSeparatorsTable, 2);
-            tableStandSimbol(dKeyWordsTable, 1);
-            tableStandSimbol(dIndentifiersTable, 4);
 
-           PrintSymdolTable(listSymbolTable);
+            tableStandSimbol(dLiteralsTable, "3");
+            tableStandSimbol(dIndentifiersTable, "4");
+            tableStandSimbol(dSeparatorsTable, "2");
+            tableStandSimbol(dKeyWordsTable, "1");
+
+
+
+
+            PrintSymdolTable();
+
+
+
+            if (rText.Text != "")
+            {
+                if (checkIdent())
+                    llkGrammatiks.Program(listSymbolTable, keyWords, separators, literals, variables);
+                else
+                {
+                    literals.Clear();
+                    variables.Clear();
+                    listSymbolTable.Clear();
+                    llkGrammatiks.number = 0;
+                    MessageBox.Show("Ошибка. Длина идентификатора должна быть меньше 8 символов!!!", "Лексический анализ", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    llkGrammatiks.listMatrix.Clear();
+
+                    return;
+                }
+                literals.Clear();
+                variables.Clear();
+                listSymbolTable.Clear();
+                llkGrammatiks.number = 0;
+                llkGrammatiks.listMatrix.Clear();
+
+            }
+            else
+            {
+                MessageBox.Show("Ошибка. Введите данные в поле!!!", "Лексический анализ", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                return;
+            }
+            listSymbolTable.Clear();
+            llkGrammatiks.number = 0;
+            llkGrammatiks.listMatrix.Clear();
+            literals.Clear();
+            variables.Clear();
         }
 
+        public bool checkIdent()
+        {
+            for (int i = 0; i < variables.Count;i++)
+            {
+                if (variables[i].Length > 8)
+                {
+                    return false;
+                } 
+            }
+            
+            if (true)
+                return true;
+  
+        }
 
-        public void tableStandSimbol(DataGridView dataGridView, int numbers)
+        public void tableStandSimbol(DataGridView dataGridView, string numbers)
         {
            
             foreach (DataGridViewRow row1 in dStandSymbolTable.Rows)
@@ -111,16 +194,22 @@ namespace Laba1
                 {
                     if (row1.Cells[0].Value.ToString() == row2.Cells[1].Value.ToString())
                     {
-                        row1.Cells[0].Value = numbers;
+                       
                         row1.Cells[1].Value = row2.Cells[0].Value;
+                        row1.Cells[0].Value = numbers;
+                        break;
+                        
 
                     }
                 }
             }
 
+           
         }
 
-        public void PrintSymdolTable(ListWithDuplicates list)
+
+
+        public void PrintSymdolTable()
         {
             foreach (DataGridViewRow row1 in dStandSymbolTable.Rows)
             {
@@ -152,75 +241,83 @@ namespace Laba1
             {
                 dataGridView.Rows.Add(i, list[i]);
             }
+
         }
 
         
-        public void addToList(string lexem)
+        public bool addToList(string lexem)
         {
-
+          
             if (int.TryParse(lexem, out int numericValue)) //если число
             {
-                var list = new ListWithDuplicates();
-                if (!literals.Contains(lexem))
+                    var list = new ListWithDuplicates();
+                if (!literals.Contains(lexem.Replace(" ", "")))
                     literals.Add(lexem);
-                list.Add(lexem, "L");
+                list.Add(lexem.Replace(" ", ""), "L");
                 PrintLeksem(list);
-                dStandSymbolTable.Rows.Add(lexem);
+                dStandSymbolTable.Rows.Add(lexem.Replace(" ", ""));
 
 
 
             }
             else
             {
-
-                if (separators.Contains(Convert.ToString(lexem)))
+               
+                if (separators.Contains(Convert.ToString(lexem.Replace(" ", ""))))
                 {
                     var list = new ListWithDuplicates();
-                    list.Add(lexem, "R");
+                    list.Add(lexem.Replace(" ", ""), "R");
                     PrintLeksem(list);
-                    dStandSymbolTable.Rows.Add(lexem);
+                    dStandSymbolTable.Rows.Add(lexem.Replace(" ", ""));
 
                 }
 
                 else
                 {
-                 
-                    if ((lexem[0] >= 48 && lexem[0] <= 57))
-                    {
-                        MessageBox.Show($"Ошибка в лексеме: {lexem}", "Вывод лексем", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                        return;
-                    }
                   
-                    else 
-                    {
-                    
-                        if((lexem[0] >= 65 && lexem[0] <= 90) || (lexem[0] >= 97 && lexem[0] <= 122))
-                        {
-                            
-                            var list = new ListWithDuplicates();
-                            list.Add(lexem, "I");
-                            if (!keyWords.Contains(lexem) && !variables.Contains(lexem))
-                            {
-                                variables.Add(lexem);
+                  
 
-                            }
-                           
-                            PrintLeksem(list);
-                            dStandSymbolTable.Rows.Add(lexem);
-
-                        }
-                        else
+                        if ((lexem[0] >= 48 && lexem[0] <= 57) && (lexem.Length == 0))
                         {
                             MessageBox.Show($"Ошибка в лексеме: {lexem}", "Вывод лексем", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                            return;
+                            return false;
                         }
 
-                    }
+                        else
+                        {
+                            if (lexem == " ")
+                            {
+                                return true;
+                            }
+                            lexem = lexem.Trim();
+                            if ((lexem[0] >= 65 && lexem[0] <= 90) || (lexem[0] >= 97 && lexem[0] <= 122))
+                            {
+
+                                var list = new ListWithDuplicates();
+                                list.Add(lexem.Replace(" ", ""), "I");
+                                if (!keyWords.Contains(lexem.Replace(" ", "")) && !variables.Contains(lexem.Replace(" ", "")))
+                                {
+                                    variables.Add(lexem);
+
+                                }
+
+                                PrintLeksem(list);
+                                dStandSymbolTable.Rows.Add(lexem.Replace(" ", ""));
+
+                            }
+                            else
+                            {
+                                MessageBox.Show($"Ошибка в лексеме: {lexem}", "Вывод лексем", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                                return false;
+                            }
+
+                        }
+                    
 
                 }
 
             }
-
+            return true;
         }
 
         private void PrintText()

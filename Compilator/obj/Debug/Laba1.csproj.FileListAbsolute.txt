@@ -30,3 +30,14 @@ C:\3 курс\Теория автоматов и формальных языко
 C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\Compilator\obj\Debug\Laba1.csproj.CoreCompileInputs.cache
 C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\Compilator\obj\Debug\Laba1.exe
 C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\Compilator\obj\Debug\Laba1.pdb
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\bin\Debug\Laba1.exe.config
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\bin\Debug\Laba1.exe
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\bin\Debug\Laba1.pdb
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\obj\Debug\Laba1.csproj.AssemblyReference.cache
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\obj\Debug\Laba1.csproj.SuggestedBindingRedirects.cache
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\obj\Debug\Laba1.Form1.resources
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\obj\Debug\Laba1.Properties.Resources.resources
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\obj\Debug\Laba1.csproj.GenerateResource.cache
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\obj\Debug\Laba1.csproj.CoreCompileInputs.cache
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\obj\Debug\Laba1.exe
+C:\3 курс\Теория автоматов и формальных языков\Курсовая работа\AutomataTheory\Compilator\obj\Debug\Laba1.pdb
