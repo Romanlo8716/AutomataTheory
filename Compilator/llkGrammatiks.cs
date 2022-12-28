@@ -134,8 +134,8 @@ namespace Laba1
 
         public static bool assignment(ListWithDuplicates keyValuePairs, int k, List<string> keyWords, List<string> separators, List<string> literals, List<string> variables)
         {
-            if(number < keyValuePairs.Count)
-            {
+            //if (number < keyValuePairs.Count)
+            //{
                 if (!variables.Contains(lexeme))
                 {
                     Errors.errorVariables();
@@ -143,8 +143,8 @@ namespace Laba1
                 }
                
                 Next(keyValuePairs, keyWords, separators, literals, variables);
-                if (number < keyValuePairs.Count)
-                {
+                //if (number < keyValuePairs.Count)
+                //{
                     if (lexeme != "=")
                     {
                         Errors.errorRavno();
@@ -174,18 +174,18 @@ namespace Laba1
                         return false;
                     }
                   
-                }
-                else
-                {
-                    Errors.errorSintax();
-                    return false;
-                }
-            }
-            else
-            {
-                Errors.errorSintax();
-                return false;
-            }
+                //}
+                //else
+                //{
+                //    Errors.errorSintax();
+                //    return false;
+                //}
+            //}
+            //else
+            //{
+            //    Errors.errorSintax();
+            //    return false;
+            //}
             
             if (true)
             {
@@ -230,7 +230,7 @@ namespace Laba1
             }
             else
             {
-                MessageBox.Show("Ошибка выражения","Анализ сложных выражений", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка. Ожидался литерал или идентификатор!","Анализ сложных выражений", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 return false;
             }
             
@@ -276,7 +276,7 @@ namespace Laba1
 
         public static bool D5()
         {
-            MessageBox.Show("Ошибка выражения", "Анализ сложных выражений", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            MessageBox.Show("Ошибка! Несбалансированные скобки", "Анализ сложных выражений", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
             return false;
         }
 
@@ -295,15 +295,15 @@ namespace Laba1
 
         public static bool expr(ListWithDuplicates keyValuePairs, int k, List<string> keyWords, List<string> separators, List<string> literals, List<string> variables)
         {
-            
-            if (number < keyValuePairs.Count)
-            {
-               
+
+            //if (number < keyValuePairs.Count)
+            //{
+
                 if (variables.Contains(lexeme) || literals.Contains(lexeme))
                 {
                     kID(keyValuePairs, keyWords, separators, literals, variables);
 
-                    if(literals.Contains(lexeme) || variables.Contains(lexeme)){
+                    if(literals.Contains(lexeme) || variables.Contains(lexeme) || lexeme == "("){
                         MessageBox.Show("Ошибка. Ожидался знак операций", "Анализ сложных выражений", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         return false;
                     }
@@ -404,9 +404,11 @@ namespace Laba1
                                 return false;
                             }
                         
-                       
-                           
-                           
+                        
+
+
+
+
                         }
                        else if(T.Peek() == "(")
                         {
@@ -415,8 +417,9 @@ namespace Laba1
                             {
                                 return false;
                             }
+                   
 
-                        }
+                    }
                         else if (T.Peek() == "+" || T.Peek() == "-" || T.Peek() == "*" || T.Peek() == "/")
                         {
                             if (!D4(keyValuePairs, keyWords, separators, literals, variables))
@@ -427,11 +430,11 @@ namespace Laba1
                             }
 
                         }
-                     
-                      
-                       
+                   
 
-                    }
+
+
+                }
                     else if (lexeme == ";")
                     {
                         if(T.Count == 0)
@@ -482,12 +485,12 @@ namespace Laba1
                 T.Clear();
 
 
-            }
-            else
-            {
-                Errors.errorSintax();
-                return false;
-            }
+            //}
+            //else
+            //{
+            //    Errors.errorSintax();
+            //    return false;
+            //}
 
             
             if (true)
@@ -644,8 +647,8 @@ namespace Laba1
                 }
                 else
                 {
-                    Errors.errorOutputScob();
-                    return false;
+                Errors.errorZapOROutputScob();
+                return false;
                 }
        
 
@@ -816,7 +819,7 @@ namespace Laba1
             if(number == keyValuePairs.Count)
             {
 
-                MessageBox.Show("Синтаксический анализ выполнен успешно!!!", "Лексический анализ", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                MessageBox.Show("Синтаксический анализ выполнен успешно!!!", "Синтаксический анализ", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 return;
             }
             if (number > keyValuePairs.Count)
@@ -828,8 +831,22 @@ namespace Laba1
             }
             if(number < keyValuePairs.Count)
             {
-                Errors.errorMinusEnd();
-                return;
+                if(lexeme == ";")
+                {
+                    Errors.errorMinZap();
+                    return;
+                }
+                else if(lexeme == "end")
+                {
+                    Errors.errorMinusEnd();
+                    return;
+                }
+                else
+                {
+                    Errors.errorMinusLexem();
+                    return;
+                }
+                
             }
         }
 

@@ -78,10 +78,10 @@ namespace Laba1
             MessageBox.Show("Ошибка в лексеме: " + lexeme + ". Ожидался ,", "Синтаксический анализ", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public static void errorSintax()
-        {
-            MessageBox.Show("Ошибка в синтаксисе программы", "Синтаксический анализ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+        //public static void errorSintax()
+        //{
+        //    MessageBox.Show("Ошибка в синтаксисе программы", "Синтаксический анализ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //}
 
         public static void errorZapOROutputScob()
         {
